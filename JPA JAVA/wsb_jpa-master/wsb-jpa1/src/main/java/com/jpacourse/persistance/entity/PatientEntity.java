@@ -30,6 +30,9 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
+	@Column(name = "registration_date", nullable = false)
+	private LocalDate registrationDate;
+
 	// jednostronna od rodzica(patient->address)
 	@ManyToOne
 	@JoinColumn(name = "address_id", nullable = false)
@@ -114,4 +117,8 @@ public class PatientEntity {
 	public void setVisits(List<VisitEntity> visits) {
 		this.visits = visits;
 	}
+
+	public LocalDate getRegistrationDate() {return registrationDate;}
+
+	public void setRegistrationDate(LocalDate registrationDate) {this.registrationDate = registrationDate;}
 }

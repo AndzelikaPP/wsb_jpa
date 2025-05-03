@@ -1,8 +1,10 @@
 package com.jpacourse.persistance.entity;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
+import com.jpacourse.persistance.enums.TreatmentType;
 import jakarta.persistence.*;
 
 @Entity
@@ -78,6 +80,12 @@ public class VisitEntity {
 
 	public void setMedicalTreatments(List<MedicalTreatmentEntity> medicalTreatments) {
 		this.medicalTreatments = medicalTreatments;
+	}
+
+	public List<TreatmentType> getTreatments() {
+		return this.medicalTreatments.stream()
+				.map(MedicalTreatmentEntity::getType)
+				.toList();
 	}
 
 }

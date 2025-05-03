@@ -54,4 +54,5 @@ public class MedicalTreatmentEntity {
 	public void setVisit(VisitEntity visit) {
 		this.visit = visit;
 	}
+
 }

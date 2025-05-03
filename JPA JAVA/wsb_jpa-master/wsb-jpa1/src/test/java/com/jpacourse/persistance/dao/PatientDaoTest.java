@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,5 +37,28 @@ class PatientDaoTest {
                 .orElse(null);
         assertThat(addedVisitAlsoAddedInPatientVisits).isNotNull();
     }
+
+    @Test
+    void shouldFindByLastName() {
+        List<PatientEntity> results = patientDao.findByLastName("Kowalski");
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getFirstName()).isEqualTo("Jan");
+    }
+
+    @Test
+    void shouldFindPatientsWithMoreThan3Visits() {
+        List<PatientEntity> results = patientDao.findPatientsWithMoreThanXVisits(3);
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getLastName()).isEqualTo("Kura");
+    }
+
+    @Test
+    void shouldFindPatientsRegisteredAfterGivenDate() {
+        List<PatientEntity> results = patientDao.findByRegistrationDateAfter(LocalDate.of(2024, 1, 1));
+        assertThat(results).hasSize(1);
+        assertThat(results.get(0).getLastName()).isEqualTo("Sobieska");
+    }
+
+
 
 }

@@ -67,4 +67,20 @@ class PatientServiceTest {
         assertThat(relatedVisit.getDoctorLastName()).isNotNull();
     }
 
+    @Test
+    @Transactional
+    public void shouldGetVisitsByPatientId() {
+        List<VisitTO> visits = patientService.getVisitsByPatientId(PATIENT_ID_TO_FIND);
+
+        assertThat(visits).isNotNull();
+        assertThat(visits).isNotEmpty();
+
+        VisitTO visit = visits.get(0);
+        assertThat(visit.getDescription()).isNotNull();
+        assertThat(visit.getTime()).isNotNull();
+        assertThat(visit.getDoctorFirstName()).isNotNull();
+        assertThat(visit.getDoctorLastName()).isNotNull();
+        assertThat(visit.getTreatmentTypes()).isNotNull();
+    }
+
 }
